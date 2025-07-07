@@ -55,15 +55,15 @@ function Login() {
           <Image src={Logo} alt="Logo" width={120} />
           <div className="flex flex-col">
             <p className="text-2xl text-duniacoding-primary font-bold">
-              SekolahKu
+              Hadirly
             </p>
             <p className="text-primary">
-              Sekolahku, sekolahmu, sekolah kita semua
+              Hadirku, Hadirmu, Hadir Kita Semua
             </p>
           </div>
         </div>
         <h1 className="text-xl font-bold text-primary">
-          Masuk <br /> ke SekolahKu
+          Masuk <br /> ke Hadirly
         </h1>
         <form onSubmit={handleLogin} className="space-y-4">
           <div className="flex flex-col gap-2">

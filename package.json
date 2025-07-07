@@ -1,5 +1,5 @@
 {
-  "name": "absensi",
+  "name": "hadirly",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "cookies-next": "^6.0.0",
-    "firebase": "^11.9.1",
+    "firebase": "^11.10.0",
     "next": "15.3.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

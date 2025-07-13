@@ -55,12 +55,12 @@ export default function RegisterStudentPage() {
 
   return (
     <>
-      <div className="w-full h-full">
-        <form onSubmit={handleSubmit} className="p-10 space-y-4 max-w-md">
-          <h1 className="text-xl font-bold text-primary">Tambah Siswa</h1>
+      <div className="w-full h-full flex justify-center items-start">
+        <form onSubmit={handleSubmit} className="p-4 md:p-10 space-y-4 max-w-md w-full bg-white dark:bg-[var(--background)] rounded-2xl shadow-xl border border-[var(--disable)] mt-8 transition-colors duration-300">
+          <h1 className="text-xl font-bold text-[var(--primary)] mb-4">Tambah Siswa</h1>
 
           <div className="flex flex-col gap-2">
-            <label htmlFor="name">Nama Siswa</label>
+            <label htmlFor="name" className="text-[var(--foreground)] font-semibold text-sm mb-1">Nama Siswa</label>
             <input
               name="name"
               type="text"
@@ -68,11 +68,11 @@ export default function RegisterStudentPage() {
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
-              className="border px-4 py-3 w-full border-disable rounded-lg placeholder:text-disable placeholder:font-light text-sm"
+              className="border border-[var(--disable)] focus:border-[var(--primary)] focus:ring-2 focus:ring-[var(--primary)] px-4 py-3 w-full rounded-xl placeholder:text-[var(--disable)] placeholder:font-light text-sm bg-transparent text-[var(--foreground)] transition-all"
             />
           </div>
           <div className="flex flex-col gap-2">
-            <label htmlFor="studentId">Nomor Induk Siswa</label>
+            <label htmlFor="studentId" className="text-[var(--foreground)] font-semibold text-sm mb-1">Nomor Induk Siswa</label>
             <input
               name="studentId"
               type="number"
@@ -81,29 +81,30 @@ export default function RegisterStudentPage() {
               value={studentId}
               onChange={(e) => setStudentId(e.target.value)}
               required
-              className="border px-4 py-3 w-full border-disable rounded-lg placeholder:text-disable placeholder:font-light text-sm"
+              className="border border-[var(--disable)] focus:border-[var(--primary)] focus:ring-2 focus:ring-[var(--primary)] px-4 py-3 w-full rounded-xl placeholder:text-[var(--disable)] placeholder:font-light text-sm bg-transparent text-[var(--foreground)] transition-all"
             />
           </div>
           <div className="flex flex-col gap-2">
-            <label htmlFor="grade">Kelas</label>
+            <label htmlFor="grade" className="text-[var(--foreground)] font-semibold text-sm mb-1">Kelas</label>
             <select
               name="grade"
               value={grade}
               onChange={(e) => setGrade(e.target.value)}
-              className="border px-4 py-3 w-full border-disable rounded-lg placeholder:text-disable placeholder:font-light text-sm"
+              className="border border-[var(--disable)] focus:border-[var(--primary)] focus:ring-2 focus:ring-[var(--primary)] px-4 py-3 w-full rounded-xl placeholder:text-[var(--disable)] placeholder:font-light text-sm bg-white dark:bg-[var(--background)] text-[var(--foreground)] transition-all"
+              title="Pilih Kelas"
             >
               <option value="" disabled>
                 Pilih Kelas
               </option>
               {[1, 2, 3, 4, 5, 6].map((n) => (
-                <option key={n} value={n}>
+                <option key={n} value={n} className="text-[var(--foreground)] bg-white dark:bg-[var(--background)]">
                   Kelas {n}
                 </option>
               ))}
             </select>
           </div>
           <div className="flex flex-col gap-2">
-            <label htmlFor="parentPhone">No. Telp Orang Tua</label>
+            <label htmlFor="parentPhone" className="text-[var(--foreground)] font-semibold text-sm mb-1">No. Telp Orang Tua</label>
             <input
               name="parentPhone"
               type="number"
@@ -112,16 +113,16 @@ export default function RegisterStudentPage() {
               value={parentPhone}
               onChange={(e) => setParentPhone(e.target.value)}
               required
-              className="border px-4 py-3 w-full border-disable rounded-lg placeholder:text-disable placeholder:font-light text-sm"
+              className="border border-[var(--disable)] focus:border-[var(--primary)] focus:ring-2 focus:ring-[var(--primary)] px-4 py-3 w-full rounded-xl placeholder:text-[var(--disable)] placeholder:font-light text-sm bg-transparent text-[var(--foreground)] transition-all"
             />
           </div>
 
-          {error && <p className="text-error text-sm">{error}</p>}
-          <div className="mt-12">
+          {error && <p className="text-[var(--danger)] text-sm font-semibold mt-2">{error}</p>}
+          <div className="mt-8">
             <button
               type="submit"
               disabled={loading}
-              className="bg-duniakoding-primary w-full text-white px-4 py-3 rounded-2xl"
+              className="bg-[var(--primary)] hover:bg-[var(--secondary)] w-full text-white px-4 py-3 rounded-2xl font-bold shadow-md transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
             >
               {loading ? "Menyimpan..." : "Simpan Siswa"}
             </button>

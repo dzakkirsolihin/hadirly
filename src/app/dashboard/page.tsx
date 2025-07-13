@@ -75,37 +75,47 @@ export default function AttendanceTablePage() {
   };
 
   return (
-    <div className="p-10 max-w-3xl space-y-6">
-      <h1 className="text-xl font-bold text-primary">Rekap Kehadiran Siswa</h1>
+    <div className="p-4 md:p-10 max-w-3xl mx-auto space-y-6 font-poppins bg-[var(--background)] min-h-screen transition-colors duration-300">
+      <h1 className="text-xl md:text-2xl font-bold text-[var(--primary)] mb-2">Rekap Kehadiran Siswa</h1>
 
-      <div className="flex flex-col md:flex-row gap-4">
-        <input
-          type="date"
-          placeholder="Pilih Tanggal"
-          max={today}
-          value={selectedDate}
-          onChange={(e) => setSelectedDate(e.target.value)}
-          className="border p-3 w-40 border-disable font-normal rounded-lg placeholder:text-disable placeholder:font-light text-sm"
-        />
-
-        <select
-          value={selectedGrade}
-          onChange={(e) => setSelectedGrade(e.target.value)}
-          className="border p-3 w-40 border-disable font-normal rounded-lg placeholder:text-disable placeholder:font-light text-sm"
-        >
-          <option className="text-disable" value="">
-            Pilih Kelas
-          </option>
-          {grades.map((grade) => (
-            <option key={grade} value={grade}>
-              Kelas {grade}
+      <div className="flex flex-col md:flex-row gap-4 bg-white/80 dark:bg-[var(--background)]/80 p-4 md:p-0 rounded-xl shadow-md md:shadow-none">
+        <div className="relative w-full md:w-40">
+          <input
+            type="date"
+            placeholder="Pilih Tanggal"
+            max={today}
+            value={selectedDate}
+            onChange={(e) => setSelectedDate(e.target.value)}
+            className="border border-[var(--disable)] focus:border-[var(--primary)] focus:ring-2 focus:ring-[var(--primary)] p-3 w-full font-normal rounded-xl placeholder:text-[var(--disable)] placeholder:font-light text-sm bg-transparent text-[var(--foreground)] transition-all custom-date-picker"
+          />
+        </div>
+        <div className="relative w-full md:w-40">
+          <select
+            value={selectedGrade}
+            onChange={(e) => setSelectedGrade(e.target.value)}
+            className="appearance-none border border-[var(--disable)] focus:border-[var(--primary)] focus:ring-2 focus:ring-[var(--primary)] px-4 py-3 w-full font-normal rounded-xl placeholder:text-[var(--disable)] placeholder:font-light text-sm bg-white dark:bg-[var(--background)] text-[var(--foreground)] transition-all custom-select pr-10"
+            title="Pilih Kelas"
+          >
+            <option className="text-[var(--disable)] bg-white dark:bg-[var(--background)]" value="">
+              Pilih Kelas
             </option>
-          ))}
-        </select>
-        <div className="w-40">
+            {grades.map((grade) => (
+              <option key={grade} value={grade} className="text-[var(--foreground)] bg-white dark:bg-[var(--background)]">
+                Kelas {grade}
+              </option>
+            ))}
+          </select>
+          {/* Custom arrow icon */}
+          <div className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-[var(--disable)]">
+            <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+        </div>
+        <div className="w-full md:w-40">
           <button
             onClick={handleFetchAttendance}
-            className="bg-duniakoding-primary w-full text-white px-4 py-3 rounded-2xl font-regular"
+            className="bg-[var(--primary)] hover:bg-[var(--secondary)] w-full text-white px-4 py-3 rounded-2xl font-bold shadow-md transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
             disabled={!selectedDate || !selectedGrade || loading}
           >
             {loading ? "Memuat..." : "Tampilkan"}
@@ -114,12 +124,12 @@ export default function AttendanceTablePage() {
       </div>
 
       {dataLoaded && (
-        <>
+        <div className="overflow-x-auto">
           {attendances.length === 0 ? (
-            <p className="text-gray-500 mt-4">Data Belum Tersedia</p>
+            <p className="text-[var(--disable)] mt-4">Data Belum Tersedia</p>
           ) : (
-            <table className="w-full mt-6 border text-left">
-              <thead className="bg-duniakoding-primary text-white">
+            <table className="w-full mt-6 border text-left rounded-xl overflow-hidden shadow-md bg-white dark:bg-[var(--background)]">
+              <thead className="bg-[var(--primary)] text-white">
                 <tr>
                   <th className="p-2">Nama</th>
                   <th className="p-2">Nomor Induk</th>
@@ -128,18 +138,18 @@ export default function AttendanceTablePage() {
                 </tr>
               </thead>
               <tbody>
-                {attendances.map((a) => (
-                  <tr key={a.studentId}>
-                    <td className="p-2 border">{a.name}</td>
-                    <td className="p-2 border">{a.studentId}</td>
-                    <td className="p-2 border">{a.grade}</td>
-                    <td className="p-2 border">{a.status}</td>
+                {attendances.map((a, idx) => (
+                  <tr key={a.studentId} className={`even:bg-[var(--accent)]/10 odd:bg-white dark:odd:bg-[#1e293b] hover:bg-[var(--secondary)]/20 transition-colors`}>
+                    <td className="p-2 border-b border-[var(--disable)] text-[var(--foreground)]">{a.name}</td>
+                    <td className="p-2 border-b border-[var(--disable)] text-[var(--foreground)]">{a.studentId}</td>
+                    <td className="p-2 border-b border-[var(--disable)] text-[var(--foreground)]">{a.grade}</td>
+                    <td className="p-2 border-b border-[var(--disable)] text-[var(--foreground)]">{a.status}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           )}
-        </>
+        </div>
       )}
     </div>
   );

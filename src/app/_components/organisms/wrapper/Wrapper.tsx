@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import Header from '../../molecule/header/header';
 import Sidebar from '../../molecule/sidebar/Sidebar';
 import { usePathname } from 'next/navigation';
@@ -13,15 +13,18 @@ function Wrapper(props: Readonly<WrapperProps>) {
   const { children } = props;
   const pathname = usePathname();
   const isPublicPath = publicPaths.includes(pathname);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const handleSidebarToggle = () => setSidebarOpen((v) => !v);
+  const handleSidebarClose = () => setSidebarOpen(false);
   return (
-    <body className="font-poppins font-bold text-duniakoding-primary">
+    <body className="font-poppins bg-[var(--background)] text-[var(--foreground)] min-h-screen transition-colors duration-300">
       {!isPublicPath && (
         <>
-          <Header />
-          <Sidebar />
+          <Header onSidebarToggle={handleSidebarToggle} />
+          <Sidebar open={sidebarOpen} onClose={handleSidebarClose} />
         </>
       )}
-      <main className={`${!isPublicPath && 'mt-20 ml-64'}`}>{children}</main>
+      <main className={`${!isPublicPath ? 'mt-20 md:ml-64' : ''} transition-all duration-300`}>{children}</main>
     </body>
   );
 }

@@ -1,25 +1,56 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme {
-  --color-duniakoding-primary: #21007d;
-  --color-duniakoding-secondary: #6b3af8;
-  --color-duniakoding-tertiary: #121212;
-  --color-primary: #495057;
-  --color-secondary: #ffffff;
-  --color-tertiary: #6b3af8;
-  --color-disable: #a0a0a0;
-  --color-error: #bc1d42;
-  --font-poppins: Poppins, sans-serif;
+  --background: #f8fafc; /* biru muda sangat terang */
+  --foreground: #1e293b; /* biru gelap modern */
+  --primary: #2563eb;    /* biru edukasi */
+  --secondary: #22c55e;  /* hijau segar */
+  --accent: #fbbf24;     /* kuning cerah */
+  --danger: #ef4444;     /* merah modern */
+  --info: #0ea5e9;       /* biru info */
+  --warning: #f59e42;    /* oranye edukasi */
+  --disable: #a0aec0;    /* abu-abu soft */
+  --font-poppins: 'Poppins', 'Segoe UI', Arial, sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #0f172a;
+    --foreground: #f1f5f9;
+    --primary: #60a5fa;
+    --secondary: #4ade80;
+    --accent: #fde68a;
+    --danger: #f87171;
+    --info: #38bdf8;
+    --warning: #fdba74;
+    --disable: #475569;
   }
+}
+
+html {
+  font-family: var(--font-poppins);
+  font-size: 16px;
+  background: var(--background);
+  color: var(--foreground);
+  min-height: 100%;
+}
+
+/* Custom date picker icon agar kontras di dark mode */
+input[type="date"].custom-date-picker::-webkit-calendar-picker-indicator {
+  filter: invert(1) brightness(2);
+}
+input[type="date"].custom-date-picker::-webkit-input-placeholder {
+  color: var(--disable);
+}
+input[type="date"].custom-date-picker::placeholder {
+  color: var(--disable);
+}
+
+/* Custom select dropdown agar warna background dan font kontras */
+select.custom-select, select.custom-select option {
+  background: var(--background);
+  color: var(--foreground);
+}
+select.custom-select:focus {
+  outline: 2px solid var(--primary);
 }

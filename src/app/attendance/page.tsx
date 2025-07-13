@@ -113,24 +113,25 @@ export default function Attendance() {
 
   return (
     <>
-      <div className="w-full h-full">
-        <form onSubmit={handleSubmit} className="p-10 space-y-4 max-w-md">
-          <h1 className="text-xl font-bold text-primary">Input Kehadiran</h1>
+      <div className="w-full h-full flex justify-center items-start">
+        <form onSubmit={handleSubmit} className="p-4 md:p-10 space-y-4 max-w-md w-full bg-white dark:bg-[var(--background)] rounded-2xl shadow-xl border border-[var(--disable)] mt-8 transition-colors duration-300">
+          <h1 className="text-xl font-bold text-[var(--primary)] mb-4">Input Kehadiran</h1>
 
           {/* Pilih Kelas */}
           <div className="flex flex-col gap-2">
-            <label htmlFor="grade">Kelas</label>
+            <label htmlFor="grade" className="text-[var(--foreground)] font-semibold text-sm mb-1">Kelas</label>
             <select
               required
               value={selectedGrade}
               onChange={(e) => setSelectedGrade(e.target.value)}
-              className="border px-2 w-full py-3 font-normal border-disable rounded-lg placeholder:text-disable placeholder:font-light text-sm"
+              className="border border-[var(--disable)] focus:border-[var(--primary)] focus:ring-2 focus:ring-[var(--primary)] px-2 w-full py-3 font-normal rounded-xl placeholder:text-[var(--disable)] placeholder:font-light text-sm bg-white dark:bg-[var(--background)] text-[var(--foreground)] transition-all"
+              title="Pilih Kelas"
             >
               <option value="" disabled>
                 Pilih Kelas
               </option>
               {[1, 2, 3, 4, 5, 6].map((n) => (
-                <option key={n} value={n.toString()}>
+                <option key={n} value={n.toString()} className="text-[var(--foreground)] bg-white dark:bg-[var(--background)]">
                   Kelas {n}
                 </option>
               ))}
@@ -139,19 +140,20 @@ export default function Attendance() {
 
           {/* Pilih Siswa */}
           <div className="flex flex-col gap-2">
-            <label htmlFor="student">Nama</label>
+            <label htmlFor="student" className="text-[var(--foreground)] font-semibold text-sm mb-1">Nama</label>
             <select
               required
               value={selectedId}
               onChange={(e) => setSelectedId(e.target.value)}
               disabled={!selectedGrade}
-              className="border px-2 w-full py-3 font-normal border-disable rounded-lg placeholder:text-disable placeholder:font-light text-sm"
+              className="border border-[var(--disable)] focus:border-[var(--primary)] focus:ring-2 focus:ring-[var(--primary)] px-2 w-full py-3 font-normal rounded-xl placeholder:text-[var(--disable)] placeholder:font-light text-sm bg-white dark:bg-[var(--background)] text-[var(--foreground)] transition-all disabled:bg-[var(--disable)]/20"
+              title="Pilih Siswa"
             >
               <option value="" disabled>
                 {selectedGrade ? "Pilih Siswa" : "Pilih Kelas Terlebih Dahulu"}
               </option>
               {filteredStudents.map((s) => (
-                <option key={s.studentId} value={s.studentId}>
+                <option key={s.studentId} value={s.studentId} className="text-[var(--foreground)] bg-white dark:bg-[var(--background)]">
                   {s.name} - {s.studentId}
                 </option>
               ))}
@@ -160,13 +162,14 @@ export default function Attendance() {
 
           {/* Pilih Status */}
           <div className="flex flex-col gap-2">
-            <label htmlFor="status">Status Kehadiran</label>
+            <label htmlFor="status" className="text-[var(--foreground)] font-semibold text-sm mb-1">Status Kehadiran</label>
             <select
               required
               value={attendanceStatus}
               onChange={(e) => setAttendanceStatus(e.target.value)}
               disabled={!selectedId}
-              className="border px-2 w-full py-3 font-normal border-disable rounded-lg placeholder:text-disable placeholder:font-light text-sm"
+              className="border border-[var(--disable)] focus:border-[var(--primary)] focus:ring-2 focus:ring-[var(--primary)] px-2 w-full py-3 font-normal rounded-xl placeholder:text-[var(--disable)] placeholder:font-light text-sm bg-white dark:bg-[var(--background)] text-[var(--foreground)] transition-all disabled:bg-[var(--disable)]/20"
+              title="Pilih Status Kehadiran"
             >
               <option value="" disabled>
                 {selectedId
@@ -175,7 +178,7 @@ export default function Attendance() {
               </option>
               {["Hadir", "Sakit", "Ijin Keperluan Pribadi", "Alpha"].map(
                 (n) => (
-                  <option key={n} value={n}>
+                  <option key={n} value={n} className="text-[var(--foreground)] bg-white dark:bg-[var(--background)]">
                     {n}
                   </option>
                 )
@@ -183,13 +186,13 @@ export default function Attendance() {
             </select>
           </div>
 
-          {error && <p className="text-error text-sm">{error}</p>}
+          {error && <p className="text-[var(--danger)] text-sm font-semibold mt-2">{error}</p>}
 
-          <div className="mt-12">
+          <div className="mt-8">
             <button
               type="submit"
               disabled={loading}
-              className="bg-duniakoding-primary w-full text-white px-4 py-3 rounded-2xl"
+              className="bg-[var(--primary)] hover:bg-[var(--secondary)] w-full text-white px-4 py-3 rounded-2xl font-bold shadow-md transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
             >
               {loading ? "Menyimpan..." : "Simpan Kehadiran"}
             </button>
